@@ -9,7 +9,7 @@ class FacebookRegistrationController extends Controller
 {
     public function store(Request $request) {
         $data = $request->validate([
-            'email' => 'required'
+            'email' => 'required|email'
         ]);
 
         FacebookRegistration::create($data);

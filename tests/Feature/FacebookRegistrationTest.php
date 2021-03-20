@@ -28,7 +28,22 @@ class FacebookRegistrationTest extends TestCase
         ]);
 
         $this->assertDatabaseCount('facebook_registrations', 0);
-
     }
 
+    /** @test */
+    public function email_needs_to_be_an_email()
+    {
+        $response = $this->post('/facebookregistration', [
+            'email' => 'abcedfzz.net'
+        ]);
+
+        $this->assertDatabaseCount('facebook_registrations', 0);
+
+        $response = $this->post('/facebookregistration', [
+            'email' => 'abcedf@zz.net'
+        ]);
+
+        $this->assertDatabaseCount('facebook_registrations', 1);
+
+    }
 }

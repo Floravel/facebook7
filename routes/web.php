@@ -14,9 +14,13 @@ use App\Http\Controllers\FacebookRegistrationController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/facebookregistration', function () {
+    return view('facebookregistration');
+});
 
 Route::post('/facebookregistration', [FacebookRegistrationController::class, 'store']);
 
