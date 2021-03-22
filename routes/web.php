@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FacebookRegistrationController;
+use App\Http\Controllers\AppController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +15,15 @@ use App\Http\Controllers\FacebookRegistrationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+
+Auth::routes();
+
+Route::get('{any}', [AppController::class, 'index'])->where('any', '.*')->middleware('auth')->name('home');
+
+
+// probably not used:
 Route::get('/facebookregistration', function () {
     return view('facebookregistration');
 });
@@ -29,3 +35,5 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
