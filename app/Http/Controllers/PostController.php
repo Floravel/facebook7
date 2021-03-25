@@ -28,6 +28,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        dd($request);
         $data = $request->validate([
             'data.attributes.body' => 'required',
             'data.attributes.title' => 'required',
