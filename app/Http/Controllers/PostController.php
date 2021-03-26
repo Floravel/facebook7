@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use http\Url;
 use Illuminate\Http\Request;
@@ -23,12 +24,11 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return PostResource
      */
     public function store(Request $request)
     {
 
-        dd($request);
         $data = $request->validate([
             'data.attributes.body' => 'required',
             'data.attributes.title' => 'required',
@@ -37,22 +37,14 @@ class PostController extends Controller
 
         $user = $request->user();
 
+
+        $post = $request->user()->posts()->create($data['data']['attributes']);
+        $post = $request->user()->posts()->create($data['data']['attributes']);
         $post = $request->user()->posts()->create($data['data']['attributes']);
 
-        return response([
-            'data' => [
-                'type' => 'posts',
-                'post_id' => $post->id,
-                'attributes' => [
-                    'title' => $post->title,
-                    'user_id' => $post->user_id,
-                    'body' => $post->body,
-                ]
-            ],
-            'links' => [
-                'self' => url('/posts/'.$post->id),
-            ]
-        ], 201);
+/*        dd(($request->user()->posts()->skip(1)->first()));*/
+
+        return new PostResource($post);
     }
 
     /**

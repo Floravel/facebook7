@@ -32,7 +32,9 @@ class PostToTimelineTest extends TestCase
             ]
         ]);
 
+
         $post = Post::first();
+
 
         $this->assertCount(1, Post::all());
         $this->assertEquals($user->id, $post->user_id);
@@ -44,8 +46,21 @@ class PostToTimelineTest extends TestCase
                     'type' => 'posts',
                     'post_id' => $post->id,
                     'attributes' => [
+                        'posted_by' => [
+                            'data' => [
+                                'type' => 'users',
+                                'user_id' => $user->id,
+                                'attributes' => [
+                                    'name' => $user->name,
+                                    'email' => $user->email,
+                                    'password' => $user->password,
+                                ],
+                            ],
+                            'links' => [
+                                'self' => url('/users/'.$user->id),
+                            ]
+                        ],
                         'title' => $post->title,
-                        'user_id' => $user->id,
                         'body' => $post->body,
                         ],
                     ],
