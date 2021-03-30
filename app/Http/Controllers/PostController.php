@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use http\Url;
@@ -13,11 +14,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return PostCollection
      */
     public function index()
     {
-        //
+        return new PostCollection(request()->user()->posts);
     }
 
     /**
@@ -37,10 +38,8 @@ class PostController extends Controller
 
         $user = $request->user();
 
+        $post = $request->user()->posts()->create($data['data']['attributes']);
 
-        $post = $request->user()->posts()->create($data['data']['attributes']);
-        $post = $request->user()->posts()->create($data['data']['attributes']);
-        $post = $request->user()->posts()->create($data['data']['attributes']);
 
 /*        dd(($request->user()->posts()->skip(1)->first()));*/
 
@@ -55,7 +54,6 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -67,7 +65,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -78,6 +76,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
