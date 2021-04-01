@@ -22,6 +22,8 @@ class RetrievePostTest extends TestCase
 
         $response = $this->get('/api/posts/');
 
+        // dd(json_decode($response->content()));
+
         $response->assertStatus(200)
         ->assertJson([
             'data' => [
@@ -30,7 +32,8 @@ class RetrievePostTest extends TestCase
                         'type' => 'posts',
                         'post_id' => $posts->last()->id,
                         'attributes' => [
-                            'body' => $posts->last()->body
+                            'title' => $posts->last()->title,
+                            'body' => $posts->last()->body,
                         ]
                     ]
                 ],
@@ -39,7 +42,8 @@ class RetrievePostTest extends TestCase
                         'type' => 'posts',
                         'post_id' => $posts->skip(1)->first()->id,
                         'attributes' => [
-                            'body' => $posts->skip(1)->first()->body
+                            'title' => $posts->skip(1)->first()->title,
+                            'body' => $posts->skip(1)->first()->body,
                         ]
                     ]
                 ],
@@ -48,7 +52,8 @@ class RetrievePostTest extends TestCase
                         'type' => 'posts',
                         'post_id' => $posts->first()->id,
                         'attributes' => [
-                            'body' => $posts->first()->body
+                            'title' => $posts->first()->title,
+                            'body' => $posts->first()->body,
                         ]
                     ]
                 ]
