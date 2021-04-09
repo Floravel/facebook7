@@ -17,7 +17,13 @@ use App\Http\Controllers\AppController;
 */
 
 
+Route::get('/aaa', function () {
 
+    $i = 42;
+    $i++;
+
+    echo $i;
+});
 
 
 Auth::routes();
