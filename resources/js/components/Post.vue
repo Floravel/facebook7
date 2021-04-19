@@ -6,14 +6,14 @@
                     <img src="https://i.pinimg.com/originals/7c/e9/bf/7ce9bf4925f798487d8a09271af891ab.jpg" height="640" width="480" alt="profile for user" class="w-8 h-8  object-cover rounded-full"/>
                 </div>
                 <div class="ml-6">
-                    <div class="text-sm font-bold">Name User</div>
+                    <div class="text-sm font-bold">{{ post.data.attributes.posted_by.data.attributes.name}}</div>
                     <div class="text-sm text-gray-600">12 Minutes</div>
                 </div>
             </div>
 
             <div class="mt-4">
                 <p>
-                    Not having fun at all
+                    {{ post.data.attributes.body }}
                 </p>
             </div>
 
@@ -46,14 +46,17 @@
                     <p class="ml-2">Commment</p>
                 </button>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Post"
+    name: "Post",
+
+    props: [
+        'post',
+    ]
 }
 </script>
 

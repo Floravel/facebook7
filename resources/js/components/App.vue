@@ -2,9 +2,7 @@
     <div class="flex flex-col flex-1 h-screen overflow-y-hidden">
         <Nav></Nav>
         <div class="flex overflow-y-hidden flex-1">
-
             <Sidebar/>
-
             <div class="overflow-x-hidden w-2/3">
                 <router-view></router-view>
                 <p v-for="i in 100">foeifhwe</p>
