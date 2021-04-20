@@ -2040,10 +2040,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Post",
   props: ['post']
@@ -38458,7 +38454,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "text-sm text-gray-600" }, [
-              _vm._v("12 Minutes")
+              _vm._v(_vm._s(_vm.post.data.attributes.posted_at))
             ])
           ])
         ]),
@@ -38473,11 +38469,17 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-         false
-          ? 0
+        _vm.post.data.attributes.image
+          ? _c("div", { staticClass: "w-full" }, [
+              _c("img", {
+                staticClass: "w-full",
+                attrs: {
+                  src: _vm.post.data.attributes.image,
+                  alt: "post image"
+                }
+              })
+            ])
           : _vm._e(),
-        _vm._v(" "),
-        _vm._m(1),
         _vm._v(" "),
         _c(
           "div",
@@ -38595,21 +38597,6 @@ var staticRenderFns = [
           height: "640",
           width: "480",
           alt: "profile for user"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full" }, [
-      _c("img", {
-        staticClass: "w-full",
-        attrs: {
-          src:
-            "https://www.pixelstalk.net/wp-content/uploads/2016/04/Landscape-wallpaper-hd-pictures-download.jpg",
-          alt: "post image"
         }
       })
     ])

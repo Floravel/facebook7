@@ -25,7 +25,9 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence(rand(5,10)),
             'body' => $this->faker->sentence(rand(11,30)),
+            'image' => 'image.jpg',
             'user_id' => User::factory()->create()->id,
+            'created_at' => now(),
         ];
     }
 }

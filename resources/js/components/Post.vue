@@ -7,7 +7,7 @@
                 </div>
                 <div class="ml-6">
                     <div class="text-sm font-bold">{{ post.data.attributes.posted_by.data.attributes.name}}</div>
-                    <div class="text-sm text-gray-600">12 Minutes</div>
+                    <div class="text-sm text-gray-600">{{ post.data.attributes.posted_at}}</div>
                 </div>
             </div>
 
@@ -17,12 +17,8 @@
                 </p>
             </div>
 
-            <div class="w-full" v-if="false">
-                <img src="https://www.pixelstalk.net/wp-content/uploads/2016/04/Landscape-wallpaper-hd-pictures-download.jpg" alt="post image" class="w-full">
-            </div>
-
-            <div class="w-full">
-                <img src="https://www.pixelstalk.net/wp-content/uploads/2016/04/Landscape-wallpaper-hd-pictures-download.jpg" alt="post image" class="w-full">
+            <div class="w-full" v-if="post.data.attributes.image">
+                <img :src="post.data.attributes.image" alt="post image" class="w-full">
             </div>
 
             <div class="pt-2 flex justify-between text-gray-700 text-sm">

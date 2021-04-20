@@ -20,9 +20,14 @@ class RetrievePostTest extends TestCase
 
         $posts = Post::factory(3)->create(['user_id' => $users->id]);
 
+
+        $posts->skip(1)->first()->image = null;
+        $post = $posts->skip(1)->first();
+        $post->save();
+
         $response = $this->get('/api/posts/');
 
-        // dd(json_decode($response->content()));
+
 
         $response->assertStatus(200)
         ->assertJson([
@@ -34,6 +39,8 @@ class RetrievePostTest extends TestCase
                         'attributes' => [
                             'title' => $posts->last()->title,
                             'body' => $posts->last()->body,
+                            'image' => $posts->last()->image,
+                            'posted_at' => $posts->last()->created_at->DiffForHumans(),
                         ]
                     ]
                 ],
@@ -44,6 +51,8 @@ class RetrievePostTest extends TestCase
                         'attributes' => [
                             'title' => $posts->skip(1)->first()->title,
                             'body' => $posts->skip(1)->first()->body,
+                            'image' => null,
+                            'posted_at' => $posts->skip(1)->first()->created_at->DiffForHumans(),
                         ]
                     ]
                 ],
@@ -54,6 +63,8 @@ class RetrievePostTest extends TestCase
                         'attributes' => [
                             'title' => $posts->first()->title,
                             'body' => $posts->first()->body,
+                            'image' => $posts->first()->image,
+                            'posted_at' => $posts->first()->created_at->DiffForHumans(),
                         ]
                     ]
                 ]

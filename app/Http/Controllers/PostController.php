@@ -33,6 +33,7 @@ class PostController extends Controller
         $data = $request->validate([
             'data.attributes.body' => 'required',
             'data.attributes.title' => 'required',
+            'data.attributes.image' => '',
             'data.attributes.user_id' => 'required',
         ]);
 
