@@ -3,7 +3,7 @@
         <NewPost/>
 
         <p v-if="loading">
-            Loading Posts
+            Loading Posts...
         </p>
         <Post v-else v-for="post in posts.data" :key="post.data.post_id" :post="post"/>
     </div>
