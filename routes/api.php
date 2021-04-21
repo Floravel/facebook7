@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,7 +17,8 @@ use App\Http\Controllers\PostController;
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResources([
-        'posts' => PostController::class
+        'posts' => PostController::class,
+        'users' => UserController::class
     ]);
 });
 
