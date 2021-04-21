@@ -15,7 +15,7 @@ class UserCanViewProfileTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_view_profiles()
+    public function a_user_can_view_their_profile()
     {
         $this->withoutExceptionHandling();
         $this->actingAs($user = User::factory()->create(), 'api');
