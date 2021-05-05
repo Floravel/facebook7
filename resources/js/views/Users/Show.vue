@@ -8,7 +8,7 @@
                 <div class="w-32">
                     <img src="https://i.pinimg.com/originals/7c/e9/bf/7ce9bf4925f798487d8a09271af891ab.jpg" alt="user profile image" class="object-cover w-32 h-32 rounded-full border-4 border-gray-200 shadow-2xl">
                 </div>
-                <p class="ml-4 text-2xl text-gray-200">
+                <p v-if="!userLoading" class="ml-4 text-2xl text-gray-200">
                     {{ user.data.attributes.name }}
                 </p>
             </div>

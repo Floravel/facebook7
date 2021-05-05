@@ -1938,7 +1938,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Nav"
+  name: "Nav",
+  data: function data() {
+    return {
+      user: null,
+      userLoading: true
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/auth-user').then(function (res) {
+      _this.user = res.data;
+    })["catch"](function (error) {
+      console.log('Unable to fetch auth user');
+    })["finally"](function () {
+      _this.userLoading = false;
+    });
+  }
 });
 
 /***/ }),
@@ -2312,25 +2329,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _views_NewsFeed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/NewsFeed */ "./resources/js/views/NewsFeed.vue");
-/* harmony import */ var _views_Users_Show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/Users/Show */ "./resources/js/views/Users/Show.vue");
+/* harmony import */ var _views_NewsFeed__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/NewsFeed */ "./resources/js/views/NewsFeed.vue");
+/* harmony import */ var _views_Users_Show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/Users/Show */ "./resources/js/views/Users/Show.vue");
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_3__.default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_3__.default);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_3__.default({
   mode: 'history',
   routes: [{
     path: '/',
     name: 'home',
-    component: _views_NewsFeed__WEBPACK_IMPORTED_MODULE_0__.default
+    component: _views_NewsFeed__WEBPACK_IMPORTED_MODULE_1__.default
   }, {
     path: '/users/:userId',
     name: 'user.show',
-    component: _views_Users_Show__WEBPACK_IMPORTED_MODULE_1__.default
+    component: _views_Users_Show__WEBPACK_IMPORTED_MODULE_2__.default
   }]
 }));
 
@@ -38391,25 +38408,27 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "px-6 h-full flex items-center",
-              attrs: { to: "/" }
-            },
-            [
-              _c("img", {
-                staticClass: "w-8 h-8  object-cover rounded-full",
-                attrs: {
-                  src:
-                    "https://i.pinimg.com/originals/7c/e9/bf/7ce9bf4925f798487d8a09271af891ab.jpg",
-                  height: "640",
-                  width: "480",
-                  alt: "profile for user"
-                }
-              })
-            ]
-          ),
+          !_vm.userLoading
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "px-6 h-full flex items-center",
+                  attrs: { to: "/users/" + _vm.user.data.user_id }
+                },
+                [
+                  _c("img", {
+                    staticClass: "w-8 h-8  object-cover rounded-full",
+                    attrs: {
+                      src:
+                        "https://i.pinimg.com/originals/7c/e9/bf/7ce9bf4925f798487d8a09271af891ab.jpg",
+                      height: "640",
+                      width: "480",
+                      alt: "profile for user"
+                    }
+                  })
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "router-link",
@@ -38868,13 +38887,15 @@ var render = function() {
           [
             _vm._m(1),
             _vm._v(" "),
-            _c("p", { staticClass: "ml-4 text-2xl text-gray-200" }, [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.user.data.attributes.name) +
-                  "\n            "
-              )
-            ])
+            !_vm.userLoading
+              ? _c("p", { staticClass: "ml-4 text-2xl text-gray-200" }, [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.user.data.attributes.name) +
+                      "\n            "
+                  )
+                ])
+              : _vm._e()
           ]
         )
       ]),
