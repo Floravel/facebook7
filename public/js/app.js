@@ -1869,6 +1869,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$store.dispatch('fetchAuthUser');
+  },
+  created: function created() {
+    this.$store.dispatch('setPageTitle', this.$route.meta.title);
+  },
+  watch: {
+    $route: function $route(to, from) {
+      this.$store.dispatch('setPageTitle', to.meta.title);
+    }
   }
 });
 
@@ -2227,11 +2235,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/*window.Vue = require('vue').default;*/
-
-/*Vue.component('example-component', require('./
-components/ExampleComponent.vue').default);*/
-
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__.default({
   el: '#app',
@@ -2241,36 +2244,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_3__.default({
   router: _router_js__WEBPACK_IMPORTED_MODULE_0__.default,
   store: _store__WEBPACK_IMPORTED_MODULE_2__.default
 });
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-// require('./bootstrap');
-// window.Vue = require('vue').default;
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-/*
-const app = new Vue({
-    el: '#app',
-});
-*/
 
 /***/ }),
 
@@ -2343,11 +2316,17 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
   routes: [{
     path: '/',
     name: 'home',
-    component: _views_NewsFeed__WEBPACK_IMPORTED_MODULE_0__.default
+    component: _views_NewsFeed__WEBPACK_IMPORTED_MODULE_0__.default,
+    meta: {
+      title: 'News Feed'
+    }
   }, {
     path: '/users/:userId',
     name: 'user.show',
-    component: _views_Users_Show__WEBPACK_IMPORTED_MODULE_1__.default
+    component: _views_Users_Show__WEBPACK_IMPORTED_MODULE_1__.default,
+    meta: {
+      title: 'Profile'
+    }
   }]
 }));
 
@@ -2364,18 +2343,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
+/* harmony import */ var _modules_title__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/title */ "./resources/js/store/modules/title.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.default);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__.default.Store({
+
+vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_3__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store({
   modules: {
-    User: _modules_user__WEBPACK_IMPORTED_MODULE_0__.default
+    User: _modules_user__WEBPACK_IMPORTED_MODULE_0__.default,
+    Title: _modules_title__WEBPACK_IMPORTED_MODULE_1__.default
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/title.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/modules/title.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var state = {
+  title: 'Welcome'
+};
+var getters = {
+  pageTitle: function pageTitle(state) {
+    return state.title;
+  }
+};
+var actions = {
+  setPageTitle: function setPageTitle(_ref, title) {
+    var commit = _ref.commit,
+        state = _ref.state;
+    commit('setTitle', title);
+  }
+};
+var mutations = {
+  setTitle: function setTitle(state, title) {
+    state.title = title + " | Facebook";
+    document.title = state.title;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ }),
 
