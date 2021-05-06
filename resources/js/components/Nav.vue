@@ -31,7 +31,7 @@
                         d="M22.6 11l-9.9-9c-.4-.4-1.1-.4-1.5 0l-9.9 9c-.3.3-.5.8-.3 1.2.2.5.6.8 1.1.8h1.6v9c0 .4.3.6.6.6h5.4c.4 0 .6-.3.6-.6v-5.5h3.2V22c0 .4.3.6.6.6h5.4c.4 0 .6-.3.6-.6v-9h1.6c.5 0 .9-.3 1.1-.7.3-.5.2-1-.2-1.3zm-2.5-8h-4.3l5 4.5V3.6c0-.3-.3-.6-.7-.6z"/>
                 </svg>
             </router-link>
-            <router-link v-if="!userLoading" :to="'/users/' + user.data.user_id" class="px-6 h-full flex items-center">
+            <router-link :to="'/users/' + authUser.data.user_id" class="px-6 h-full flex items-center">
                 <img src="https://i.pinimg.com/originals/7c/e9/bf/7ce9bf4925f798487d8a09271af891ab.jpg" height="640" width="480" alt="profile for user" class="w-8 h-8  object-cover rounded-full" />
             </router-link>
 
@@ -54,27 +54,14 @@
 </template>
 
 <script>
+import { mapGetters} from 'vuex';
 export default {
     name: "Nav",
 
-    data() {
-        return {
-            user: null,
-            userLoading: true,
-        }
-    },
-
-    mounted() {
-        axios.get('/api/auth-user')
-            .then( res => {
-                this.user = res.data;
-            })
-            .catch( error => {
-                console.log('Unable to fetch auth user');
-            })
-            .finally(() => {
-                this.userLoading = false;
-            })
+    computed: {
+        ...mapGetters({
+            authUser: 'authUser'
+        })
     }
 }
 </script>
